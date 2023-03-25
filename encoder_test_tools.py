@@ -451,7 +451,7 @@ class tester:
         for r in self.result:
             report.addtable(r["test"],r["data"],["q","bitrate","ssim","ms_ssim","vmaf","speed"],
                 process=lambda x,y: str(x[y])+"&ensp;fps" if y=="speed" else str(x[y])+"&ensp;kbps" if y=="bitrate" else str(x[y]),
-                extra=self.encoder+" "+self.base_args.format(test=r["test"],q="{q}",o="{o}",passopt="<2-PASS_OPTS>"))
+                extra=self.encoder+" "+self.base_args.format(test=r["test"],q="{q}",o="{o}",passopt="<2-PASS_OPTS>" if self.twopass else ''))
         report.save("report.html")
 
 if __name__ == "__main__":
