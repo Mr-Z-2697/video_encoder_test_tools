@@ -1,10 +1,14 @@
 # video_encoder_test_tools
 
-### Tools for testing the quality of different argument of encoder and they're values
+### Tools for testing the quality of different argument of encoder and their values
 
 Mainly for myself use.
 
-Only vapoursynth scripts with absolute path in source filter are supported currently,and i may not add non-vapoursynth support in future.
+Only vapoursynth scripts with absolute path in source filter are supported currently, and i may not add non-vapoursynth support in future.
+
+### Ready to use results
+
+[In this branch](https://github.com/Mr-Z-2697/video_encoder_test_tools/tree/ready_to_use)
 
 ---
 
