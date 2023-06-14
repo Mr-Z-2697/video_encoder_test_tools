@@ -1,0 +1,1 @@
+attention please, due to the thermal characteristic of Zen4 (non-3D in particular) and my many (perhaps too many) background softwares, the encoding speed in these results are somewhat severely influenced.
