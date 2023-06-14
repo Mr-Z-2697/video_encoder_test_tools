@@ -440,7 +440,7 @@ class tester:
             self.result.append({"test":test,"data":st.getdata()})
         utils.cls()
 
-    def report(self,):
+    def report(self):
         for r in self.result:
             self.chart.add(r["data"],r["test"])
         self.chart.render()
@@ -465,6 +465,3 @@ if __name__ == "__main__":
     test.run()
     test.report()
     input('\npress enter to exit')
-
-
-        
