@@ -2,8 +2,7 @@
 
 ### Tools for testing the quality of different argument of encoder and their values
 
-Mainly for myself use.  
-Supports vapoursynth as source only.  
+Only supports vapoursynth as source.  
 Use absolute path in source filter, or path relative to working folder, which not created yet you have to imagine.
 
 ### Ready to use results
