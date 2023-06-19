@@ -1,1 +1,0 @@
-using my [x265-Yuuki-3.5+2-pgo-2](https://github.com/Mr-Z-2697/x265-Yuuki-Asuna/releases/download/3.5/x265-Yuuki-3.5+2-pgo-2.7z) build.
