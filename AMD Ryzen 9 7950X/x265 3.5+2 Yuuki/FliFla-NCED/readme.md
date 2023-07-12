@@ -1,0 +1,1 @@
+in this folder the video clip used to test is named 00009.m2ts again. untouched except upconv to 10bit as well.
