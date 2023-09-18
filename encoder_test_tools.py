@@ -257,7 +257,8 @@ class single_tester:
                     mark=False
                 template["bitrate"]=bitrate
                 template["speed"]=fps
-                template["ssim"],template["ms_ssim"],template["vmaf"]=utils.calc_score(f"{self.name}.q{q}_fin.csv")
+                vmaf_tab=['vmaf','vmaf_neg','vmaf_b_bagging','vmaf_4k'][self.vmaf_model]
+                template["ssim"],template["ms_ssim"],template[vmaf_tab]=utils.calc_score(f"{self.name}.q{q}_fin.csv")
                 self.data.append(template)
         return mark
 
@@ -274,9 +275,10 @@ class single_tester:
                 file.write(f'\n{line["q"]}\t{line["speed"]}\t{line["ssim"]}\t{line["ms_ssim"]}\t{line["vmaf"]}')
 
 class chart:
-    def __init__(self,title:str,output:str):
+    def __init__(self,title:str,output:str,vmaf_model):
         self.title=title
         self.output=output
+        self.vmaf_model=vmaf_model
         self.datas=[]
         self.chart=(
             Line(init_opts=opts.InitOpts(
@@ -336,7 +338,8 @@ class chart:
         self.chart.render(self.output)
 
     def add(self,data:list,name:str):
-        self.datas.append({"name":name,"data":[(i["bitrate"],i["vmaf"]) for i in data]})
+        vmaf_tab=['vmaf','vmaf_neg','vmaf_b_bagging','vmaf_4k'][self.vmaf_model]
+        self.datas.append({"name":name,"data":[(i["bitrate"],i[vmaf_tab]) for i in data]})
 
     def addfromfile(self,path,name):
         with open(path,"r") as file:
@@ -403,7 +406,7 @@ class tester:
         self.encoder=encoder
         self.base_args=base_args
         self.suffix=suffix
-        self.chart=chart(title=self.encoder,output="report.html")
+        self.chart=chart(title=self.encoder,output="report.html",vmaf_model=vmaf_model)
         self.cmd='vspipe -c y4m "{i}" -|'+self.encoder+" "+self.base_args
         self.twopass=twopass
         self.vmaf_model=vmaf_model
@@ -453,7 +456,8 @@ class tester:
         
         report=htmlreport(html)
         for r in self.result:
-            report.addtable(r["test"],r["data"],["q","bitrate","ssim","vmaf","speed"],
+            vmaf_tab=['vmaf','vmaf_neg','vmaf_b_bagging','vmaf_4k'][self.vmaf_model]
+            report.addtable(r["test"],r["data"],["q","bitrate","ssim",vmaf_tab,"speed"],
                 process=lambda x,y: str(x[y])+"&ensp;fps" if y=="speed" else str(x[y])+"&ensp;kbps" if y=="bitrate" else str(x[y]),
                 extra=self.encoder+" "+self.base_args.format(test=r["test"],q="{q}",o="{o}",passopt="<2-PASS_OPTS>" if self.twopass else ''))
         report.save("report.html")
